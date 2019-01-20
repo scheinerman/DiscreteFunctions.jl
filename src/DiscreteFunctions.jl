@@ -1,8 +1,8 @@
 module DiscreteFunctions
 
-import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv, has_inv
+import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv
 
-export DiscreteFunction, IdentityFunction, RandomFunction
+export DiscreteFunction, IdentityFunction, RandomFunction, has_inv
 
 """
 `DiscreteFunction` is a function from `{1,2,...,n}` to itself.
@@ -51,6 +51,10 @@ function IdentityFunction(n::Int)::DiscreteFunction
     return DiscreteFunction(data)
 end
 
+"""
+`RandomFunction(n)` creates a random `DiscreteFunction`
+on `{1,2,...,n}`.
+"""
 function RandomFunction(n::Int)
     @assert n>0 "Argument must be positive"
     data = rand(1:n,n)
