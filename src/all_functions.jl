@@ -12,6 +12,10 @@ function all_functions(n::Int)
     (DiscreteFunction(collect(t))for t in iter)
 end
 
+"""
+`find_sqrt(f::DiscreteFunction)` returns a `DiscreteFunction`
+`g` such that `g*g==f` or throws an error if no such `g` exists.
+"""
 function find_sqrt(f::DiscreteFunction)
     n = length(f)
     gen = all_functions(n)
