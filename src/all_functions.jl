@@ -1,7 +1,8 @@
 using DiscreteFunctions, Base.Iterators
-
 import Base.sqrt
 
+# This code is for finding compositional square roots of functions.
+# It is extremely inefficient!!!
 
 """
 `all_functions(n)` returns a generator that produces all
@@ -28,6 +29,20 @@ function sqrt(f::DiscreteFunction)::DiscreteFunction
     end
     error("This function does not have a square root")
 end
+
+"""
+`has_sqrt(f::DiscreteFunction)` checks if there is a function `g`
+such that `g*g==f`. Returns `true` if so and `false` otherwise.
+"""
+function has_sqrt(f::DiscreteFunction)::Bool
+    try
+        g = sqrt(f)
+        return true
+    catch
+        return false
+    end
+end
+
 
 """
 `all_sqrts(f::DiscreteFunction)` returns an array consisting

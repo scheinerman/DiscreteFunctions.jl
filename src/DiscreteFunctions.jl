@@ -5,6 +5,7 @@ using IntPrint
 import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv
 
 export DiscreteFunction, IdentityFunction, RandomFunction, has_inv
+export fixed_points
 
 """
 `DiscreteFunction` is a function from `{1,2,...,n}` to itself.
@@ -144,6 +145,12 @@ function (^)(f::DiscreteFunction, t::Integer)
     end
     return f*g*g
 end
+
+"""
+`fixed_points(f::DiscreteFunction)` returns a list of fixed points of
+the function, i.e., those values `x` such that `f(x)==x`.
+"""
+fixed_points(f::DiscreteFunction) = [ i for i in 1:length(f) if f(i)==i ]
 
 
 end  # end of module

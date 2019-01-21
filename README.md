@@ -46,3 +46,5 @@ be computed as `f^-1` and, in general, if `f` is invertible it can be raised
 to negative exponents.
 
 `length(f)` returns the number of elements in `f`'s domain.  
+
+`fixed_points(f)` returns a list of the fixed points in the function. 

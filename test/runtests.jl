@@ -23,3 +23,6 @@ g[1]=2
 
 f = RandomFunction(4)
 @test f*IdentityFunction(4) == f
+
+f = IdentityFunction(4)
+@test fixed_points(f) == collect(1:4)
