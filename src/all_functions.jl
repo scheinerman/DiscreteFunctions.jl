@@ -1,4 +1,4 @@
-using IterTools, DiscreteFunctions
+using DiscreteFunctions, Base.Iterators
 
 import Base.sqrt
 
