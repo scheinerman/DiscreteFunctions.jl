@@ -1,5 +1,7 @@
 module DiscreteFunctions
 
+using IntPrint
+
 import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv
 
 export DiscreteFunction, IdentityFunction, RandomFunction, has_inv
@@ -78,12 +80,16 @@ end
 
 function show(io::IO, f::DiscreteFunction)
     n = length(f)
+    print(io,"DiscreteFunction on [$n]\n")
+    w = 4  # window size for printing; shame to hard code this
     for i=1:n
-        print(io,"$i\t$(f(i))")
-        if i<n
-            print(io,"\n")
-        end
+        print(io,flush_print(i,w))
     end
+    print(io,"\n")
+    for i=1:n
+        print(io,flush_print(f(i),w))
+    end
+    print(io,"\n")
 end
 
 function (*)(f::DiscreteFunction, g::DiscreteFunction)::DiscreteFunction
