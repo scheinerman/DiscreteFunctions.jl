@@ -2,7 +2,7 @@ module DiscreteFunctions
 
 using IntPrint
 
-import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv
+import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv, +
 
 export DiscreteFunction, IdentityFunction, RandomFunction, has_inv
 export fixed_points
@@ -147,10 +147,24 @@ function (^)(f::DiscreteFunction, t::Integer)
 end
 
 """
+If `f` and `g` are of type `DiscreteFunction`, then `f+g`
+is their *disjoint sum*.
+"""
+function (+)(f::DiscreteFunction, g::DiscreteFunction)::DiscreteFunction
+    n1 = length(f)
+    d1 = f.data
+    d2 = g.data .+ n1
+    d = vcat(d1,d2)
+    return DiscreteFunction(d)
+end
+
+
+"""
 `fixed_points(f::DiscreteFunction)` returns a list of fixed points of
 the function, i.e., those values `x` such that `f(x)==x`.
 """
 fixed_points(f::DiscreteFunction) = [ i for i in 1:length(f) if f(i)==i ]
 
+include("all_functions.jl")
 
 end  # end of module

@@ -1,7 +1,8 @@
-using DiscreteFunctions, SimpleDrawing
+using DiscreteFunctions, SimpleDrawing, Plots
 
+import SimpleDrawing.draw
 
-function draw_function(f::DiscreteFunction)
+function draw(f::DiscreteFunction)
     n = length(f)
     newdraw()
 
@@ -9,7 +10,7 @@ function draw_function(f::DiscreteFunction)
 
     for j=1:n
         x,y = xy[j]
-        draw_point(x,y,color=:black,marker=3)
+        draw_point(x,y,color=:black,marker=1)
         annotate!(1.1x,1.1y,string(j))
     end
 
@@ -18,8 +19,11 @@ function draw_function(f::DiscreteFunction)
         fj = f(j)
         a,b = xy[j]
         c,d = xy[fj]
-        draw_vector(mu*(c-a),mu*(d-b),a,b,color=:black)
-        # draw_segment(a,b,mu*c,mu*d,arrow=:arrow,color=:black,linewidth=2)
+        if fj!=j
+            draw_vector(mu*(c-a),mu*(d-b),a,b,color=:black)
+        else
+            draw_circle(a,b,0.25,color=:black)
+        end
     end
 
     finish()

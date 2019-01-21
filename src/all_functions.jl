@@ -1,5 +1,7 @@
-using DiscreteFunctions, Base.Iterators
+using Base.Iterators
 import Base.sqrt
+
+export all_functions, sqrt, has_sqrt, all_sqrts, random_square
 
 # This code is for finding compositional square roots of functions.
 # It is extremely inefficient!!!
@@ -52,4 +54,29 @@ function all_sqrts(f::DiscreteFunction)
     n = length(f)
     gen = all_functions(n)
     [ g for g in gen if g*g==f ]
+end
+
+
+"""
+`all_squares(n)` returns a list of all function on `[n]` that are
+perfect compositional squares.
+"""
+function all_squares(n::Int)
+    G = all_functions(n)
+    S = Set(f*f for f in G)
+    collect(S)
+end
+
+"""
+`random_square(n)` returns a `DiscreteFunction` on `n` elements
+that has a compositional square root.
+"""
+function random_square(n::Int)::DiscreteFunction
+    @assert n>0 "Require `n` to be positive"
+    while true
+        f = RandomFunction(n)
+        if has_sqrt(f)
+            return f
+        end
+    end
 end
