@@ -26,3 +26,6 @@ f = RandomFunction(4)
 
 f = IdentityFunction(4)
 @test fixed_points(f) == collect(1:4)
+@test has_inv(f)
+@test is_permutation(f)
+@test image(f) == Set{Int}(1:4)

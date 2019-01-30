@@ -1,11 +1,11 @@
 module DiscreteFunctions
 
-using IntPrint
+using SimpleTools
 
 import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv, +
 
 export DiscreteFunction, IdentityFunction, RandomFunction, has_inv
-export fixed_points
+export fixed_points, image, is_permutation
 
 """
 `DiscreteFunction` is a function from `{1,2,...,n}` to itself.
@@ -164,6 +164,20 @@ end
 the function, i.e., those values `x` such that `f(x)==x`.
 """
 fixed_points(f::DiscreteFunction) = [ i for i in 1:length(f) if f(i)==i ]
+
+
+"""
+`image("f::DiscreteFunction")` returns a `Set` containing all the output
+values of `f`.
+"""
+image(f::DiscreteFunction)::Set{Int} = Set{Int}(f.data)
+
+"""
+`is_permutation(f::DiscreteFunction)` returns `true` if `f` is a
+bijection on its domain.
+"""
+is_permutation(f::DiscreteFunction)::Bool = has_inv(f)
+
 
 include("all_functions.jl")
 
