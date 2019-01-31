@@ -27,6 +27,20 @@ true
 Function evaluation may use either `f(x)` or `f[x]`. It is possible
 to change the value of `f` at `x` using the latter.
 
+If `p` is a `Permutation` then `DiscreteFunction(p)` creates a
+`DiscreteFunction` based on `p`.
+```
+julia> using Permutations
+
+julia> p = RandomPermutation(6)
+(1,6)(2,5,3,4)
+
+julia> DiscreteFunction(p)
+DiscreteFunction on [6]
+   1   2   3   4   5   6
+   6   5   4   2   3   1
+```
+
 ## Special Constructors
 
 * `IdentityFunction(n)` creates the identity function on the set `{1,2,...,n}`.

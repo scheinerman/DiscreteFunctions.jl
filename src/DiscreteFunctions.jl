@@ -1,8 +1,9 @@
 module DiscreteFunctions
 
-using SimpleTools
+using SimpleTools, Permutations
 
 import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv, +
+import Permutations: fixed_points
 
 export DiscreteFunction, IdentityFunction, RandomFunction, has_inv
 export fixed_points, image, is_permutation
@@ -43,6 +44,8 @@ function DiscreteFunction(a::Int, args...)
     end
     return DiscreteFunction(data)
 end
+
+DiscreteFunction(p::Permutation) = DiscreteFunction(p.data)
 
 """
 `IdentityFunction(n)` creates the identity `DiscreteFunction` on

@@ -1,5 +1,5 @@
 using Test
-using DiscreteFunctions
+using DiscreteFunctions, Permutations
 
 f = DiscreteFunction(2,3,4,1)
 ff = DiscreteFunction([2,3,4,1])
@@ -29,3 +29,7 @@ f = IdentityFunction(4)
 @test has_inv(f)
 @test is_permutation(f)
 @test image(f) == Set{Int}(1:4)
+
+p = RandomPermutation(10)
+f = DiscreteFunction(p)
+@test f.data == p.data
