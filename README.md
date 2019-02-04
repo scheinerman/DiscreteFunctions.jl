@@ -64,3 +64,26 @@ to negative exponents. The function `is_permutation` is a synonym for `has_inv`.
 + `length(f)` returns the number of elements in `f`'s domain.  
 + `fixed_points(f)` returns a list of the fixed points in the function.
 + `image(f)` returns a `Set` containing the output values of `f`.
+
+
+#### Expensive operations
++ `all_functions(n)` returns an iterator for all functions defined on `1:n`.
+Note that there are `n^n` such functions so this grows quickly.
++ `sqrt(f)` returns a `DiscreteFunction` `g` such that `g*g==f` or throws an
+error if no such function exists. (Currently this is done by iterating over all
+possible functions; that's very bad.)
+
+## Extras
+
+This is some additional code that is not automatically loaded by `using DiscreteFunctions`.
+Use `include` on the appropriate file in the `src` directory.
+
+### `src/tree_function.jl`
+
+This file defines `tree2function(G::SimpleGraph)`. It assumes that `G` is a
+tree with vertex set `1:n` and returns a `DiscreteFunction` defined by
+pointing all edges to the root, `1`.
+
+### `src/draw_function.jl`
+
+This file defines `draw(f)` to give a picture of `f`.
