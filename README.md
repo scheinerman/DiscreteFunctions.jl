@@ -64,6 +64,8 @@ to negative exponents. The function `is_permutation` is a synonym for `has_inv`.
 + `length(f)` returns the number of elements in `f`'s domain.  
 + `fixed_points(f)` returns a list of the fixed points in the function.
 + `image(f)` returns a `Set` containing the output values of `f`.
++ `Matrix(f)` returns a square, zero-one matrix with a one in position `i,j`
+exactly when `f(i)==j`.
 
 
 #### Expensive operations

@@ -2,7 +2,7 @@ module DiscreteFunctions
 
 using SimpleTools, Permutations
 
-import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv, +
+import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv, +, Matrix
 import Permutations: fixed_points
 
 export DiscreteFunction, IdentityFunction, RandomFunction, has_inv
@@ -181,6 +181,20 @@ bijection on its domain.
 """
 is_permutation(f::DiscreteFunction)::Bool = has_inv(f)
 
+
+"""
+`Matrix(f::DiscreteFunction)` returns an `n`-by-`n` zero-one matrix
+in which there is a `1` in position `i,j` exactly when `f(i)==j`.
+"""
+function Matrix(f::DiscreteFunction)::Array{Int,2}
+    n = length(f)
+    A = zeros(Int,n,n)
+    for i=1:n
+        j = f(i)
+        A[i,j]=1
+    end
+    return A
+end 
 
 include("all_functions.jl")
 
