@@ -194,8 +194,9 @@ function Matrix(f::DiscreteFunction)::Array{Int,2}
         A[i,j]=1
     end
     return A
-end 
+end
 
 include("all_functions.jl")
+include("opt_sqrt.jl")
 
 end  # end of module

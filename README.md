@@ -71,9 +71,9 @@ exactly when `f(i)==j`.
 #### Expensive operations
 + `all_functions(n)` returns an iterator for all functions defined on `1:n`.
 Note that there are `n^n` such functions so this grows quickly.
-+ `sqrt(f)` returns a `DiscreteFunction` `g` such that `g*g==f` or throws an
-error if no such function exists. (Currently this is done by iterating over all
-possible functions; that's very bad.)
++ `sqrt(g)` returns a `DiscreteFunction` `f` such that `f*f==g` or throws an
+error if no such function exists.  Found using integer linear programming.
++ `all_sqrts(g)` returns a list of all square roots of `g`. Very slow.
 
 ## Extras
 
