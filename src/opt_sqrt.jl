@@ -17,7 +17,7 @@ function sqrt(g::DiscreteFunction)::DiscreteFunction
     options = Dict()
     options[:logLevel] = 0
 
-    MOD = Model(with_optimizer(Cbc.Optimizer; opts=options) )
+    MOD = Model(with_optimizer(Cbc.Optimizer; Dict(:logLevel=>0)...) )
 
     @variable(MOD, a[1:n,1:n], Bin)  # entry in A matrix
     @variable(MOD, w[1:n,1:n,1:n], Bin) # w[i,j,k] is a[i,j]*a[j,k]
