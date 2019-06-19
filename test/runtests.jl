@@ -38,3 +38,6 @@ g = f*f
 A = Matrix(f)
 B = Matrix(g)
 @test A*A == B
+
+f = sqrt(g)
+@test g == f*f

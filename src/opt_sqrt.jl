@@ -20,8 +20,9 @@ function sqrt(g::DiscreteFunction)::DiscreteFunction
     MOD = Model(with_optimizer(Cbc.Optimizer; opts=options) )
 
     @variable(MOD, a[1:n,1:n], Bin)  # entry in A matrix
-    @variable(MOD, w[1:n,1:n,1:n], Bin) # w[i,j,k] is x[i,j]*x[j,k]
+    @variable(MOD, w[1:n,1:n,1:n], Bin) # w[i,j,k] is a[i,j]*a[j,k]
 
+    # this ensures w[i,j,k] is 0 if either a[i,j] or a[j,k] are
     for i=1:n
         for j=1:n
             for k=1:n
@@ -31,31 +32,30 @@ function sqrt(g::DiscreteFunction)::DiscreteFunction
         end
     end
 
+    # this ensures that the A matrix represents a function
     for i=1:n
         @constraint(MOD, sum(a[i,j] for j=1:n) == 1)
     end
 
+    # this ensures that A^2 == B
     for i=1:n
         for k=1:n
             @constraint(MOD, sum(w[i,j,k] for j=1:n) == B[i,k])
         end
     end
 
+    # Turns out, we don't need to maximize the w's to get this to work!
     # @objective(MOD, Max, sum(w[i,j,k] for i=1:n for j=1:n for k=1:n))
 
+    # try to solve
     optimize!(MOD)
-
     status = Int(termination_status(MOD))
-    if status != 1
+    if status != 1   # if status isn't 1, the IP is not feasible, no sqrt
         error(err_msg)
     end
 
-    #println("status = $status")
-    #val = objective_value(MOD)
-    #println("objective value = $val")
-
+    # build the sqrt function from the A matrix
     A = Int.(value.(a))
-
     f = DiscreteFunction(n)
     for i=1:n
         for j=1:n
@@ -65,7 +65,6 @@ function sqrt(g::DiscreteFunction)::DiscreteFunction
         end
     end
     return f
-
 end
 
 
