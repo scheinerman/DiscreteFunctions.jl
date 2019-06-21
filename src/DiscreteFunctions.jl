@@ -3,10 +3,10 @@ module DiscreteFunctions
 using SimpleTools, Permutations
 
 import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv, +, Matrix
-import Permutations: fixed_points
+import Permutations: fixed_points, Permutation
 
 export DiscreteFunction, IdentityFunction, RandomFunction, has_inv
-export fixed_points, image, is_permutation
+export fixed_points, image, is_permutation, Permutation
 
 """
 `DiscreteFunction` is a function from `{1,2,...,n}` to itself.
@@ -46,6 +46,14 @@ function DiscreteFunction(a::Int, args...)
 end
 
 DiscreteFunction(p::Permutation) = DiscreteFunction(p.data)
+
+function Permutation(f::DiscreteFunction)
+    if is_permutation(f)
+        return Permutation(f.data)
+    end
+    error("This function cannot be converted to a Permutation")
+end
+
 
 """
 `IdentityFunction(n)` creates the identity `DiscreteFunction` on

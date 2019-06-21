@@ -41,6 +41,9 @@ DiscreteFunction on [6]
    6   5   4   2   3   1
 ```
 
+Conversely, if `f` is a `DiscreteFunction` that is invertible, it can be
+converted to a `Permutation` by `Permutation(f)`.
+
 ## Special Constructors
 
 * `IdentityFunction(n)` creates the identity function on the set `{1,2,...,n}`.

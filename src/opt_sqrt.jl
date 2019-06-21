@@ -15,7 +15,7 @@ function sqrt(g::DiscreteFunction)::DiscreteFunction
     n = length(g)
     B = Matrix(g)
 
-    if det(Float64.(B)) < -0.5
+    if !quick_sqrt_test(g)
         error(err_msg)
     end
 
@@ -84,4 +84,28 @@ function has_sqrt(f::DiscreteFunction)::Bool
     catch
         return false
     end
+end
+
+"""
+`quick_sqrt_test(f::DiscreteFunction)` is a quick check of a necessary
+condition for `f` to have a square root. If this returns `false` then `f`
+does *not* have a square root. If it returns `true`, it might.
+"""
+function quick_sqrt_test(f::DiscreteFunction)::Bool
+    evals = reduced_eigvals(f)
+    d = real(prod(evals))
+    return d > 0.5
+end
+
+function reduced_eigvals(A::Array{T,2}) where T
+    elist = eigvals(A)
+    return filter(x -> abs(x)>1e-7, elist)
+end
+
+"""
+`reduced_eigvals(f::DiscreteFunction)` returns the nonzero eigenvalues of
+`f`'s matrix.
+"""
+function reduced_eigvals(f::DiscreteFunction)
+    return reduced_eigvals(Matrix(f))
 end
