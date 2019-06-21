@@ -1,6 +1,7 @@
 using JuMP
 using Cbc
 using DiscreteFunctions
+using LinearAlgebra
 import Base.sqrt
 
 """
@@ -13,6 +14,10 @@ function sqrt(g::DiscreteFunction)::DiscreteFunction
     err_msg = "This function does not have a square root."
     n = length(g)
     B = Matrix(g)
+
+    if det(Float64.(B)) < -0.5
+        error(err_msg)
+    end
 
     options = Dict()
     options[:logLevel] = 0
