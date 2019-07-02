@@ -19,3 +19,13 @@ function tree2function(G::SimpleGraph)::DiscreteFunction
     end
     return DiscreteFunction(data)
 end
+
+
+"""
+`RandomTreeFunction(n)` creates a random function whose digraph
+is a tree (with a single selfloop).
+"""
+function RandomTreeFunction(n::Int)::DiscreteFunction
+    T = RandomTree(n)
+    return tree2function(T)
+end
