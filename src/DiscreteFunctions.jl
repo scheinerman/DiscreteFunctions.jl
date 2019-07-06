@@ -1,12 +1,14 @@
 module DiscreteFunctions
 
-using SimpleTools, Permutations
+using SimpleTools, Permutations, LinearAlgebra
 
 import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv, +, Matrix
 import Permutations: fixed_points, Permutation
 
+import LinearAlgebra: eigvals
+
 export DiscreteFunction, IdentityFunction, RandomFunction, has_inv
-export fixed_points, image, is_permutation, Permutation
+export fixed_points, image, is_permutation, Permutation, eigvals
 
 """
 `DiscreteFunction` is a function from `{1,2,...,n}` to itself.
@@ -203,6 +205,11 @@ function Matrix(f::DiscreteFunction)::Array{Int,2}
     end
     return A
 end
+
+"""
+`eigvals(f::DiscreteFunction)` returns the eigenvalues of `Matrix(f)`.
+"""
+eigvals(f::DiscreteFunction) = LinearAlgebra.eigvals(Matrix(f))
 
 include("all_functions.jl")
 include("opt_sqrt.jl")

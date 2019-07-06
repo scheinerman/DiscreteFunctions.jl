@@ -7,8 +7,7 @@ import Base.sqrt
 """
 `sqrt(g::DiscreteFunction)` returns a function `f` such that
 `f*f==g` or throws an error if no such function exists.
-This method uses integer linear programming. It's reasonable
-on smallish functions.
+This method uses integer linear programming. 
 """
 function sqrt(g::DiscreteFunction)::DiscreteFunction
     err_msg = "This function does not have a square root."

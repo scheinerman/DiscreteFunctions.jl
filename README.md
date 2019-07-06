@@ -69,6 +69,7 @@ to negative exponents. The function `is_permutation` is a synonym for `has_inv`.
 + `image(f)` returns a `Set` containing the output values of `f`.
 + `Matrix(f)` returns a square, zero-one matrix with a one in position `i,j`
 exactly when `f(i)==j`.
++ `eigvals(f)` returns the eigenvalues of `Matrix(f)`.
 
 
 #### Expensive operations
