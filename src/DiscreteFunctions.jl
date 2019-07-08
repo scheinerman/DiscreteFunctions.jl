@@ -3,7 +3,7 @@ module DiscreteFunctions
 using SimpleTools, Permutations, LinearAlgebra
 
 import Base: length, show, getindex, setindex!, *, ==, hash, ^, inv, +, Matrix
-import Permutations: fixed_points, Permutation
+import Permutations: fixed_points, Permutation, cycles
 
 import LinearAlgebra: eigvals
 
@@ -212,6 +212,7 @@ end
 eigvals(f::DiscreteFunction) = LinearAlgebra.eigvals(Matrix(f))
 
 include("all_functions.jl")
+include("cycles.jl")
 include("opt_sqrt.jl")
 
 end  # end of module
