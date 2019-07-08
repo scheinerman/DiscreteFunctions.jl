@@ -213,6 +213,7 @@ eigvals(f::DiscreteFunction) = LinearAlgebra.eigvals(Matrix(f))
 
 include("all_functions.jl")
 include("cycles.jl")
+include("sources.jl")
 include("opt_sqrt.jl")
 
 end  # end of module

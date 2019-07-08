@@ -30,6 +30,7 @@ f = IdentityFunction(4)
 @test is_permutation(f)
 @test image(f) == Set{Int}(1:4)
 @test length(cycles(f)) == length(f)
+@test length(sources(f)) == 0
 
 p = RandomPermutation(10)
 f = DiscreteFunction(p)
