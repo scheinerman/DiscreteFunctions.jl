@@ -29,3 +29,19 @@ function RandomTreeFunction(n::Int)::DiscreteFunction
     T = RandomTree(n)
     return tree2function(T)
 end
+
+
+"""
+`is_tree_function(f::DiscreteFunction)` returns `true` exactly when the 
+graph of `f` is a tree (with a single loop at one vertex).
+"""
+function is_tree_function(f::DiscreteFunction)::Bool
+    clist = cycles(f)
+    if length(clist) != 1
+        return false
+    end
+    if length(clist[1]) != 1
+        return false
+    end
+    return true
+end
