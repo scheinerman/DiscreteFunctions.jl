@@ -1,7 +1,7 @@
 # The goal of these methods is to determine the JCF of the matrix
 # of tree functions.
 
-using DiscreteFunctions, LinearAlgebra
+using DiscreteFunctions, LinearAlgebra, Counters, SimpleTools
 
 function find_nonzero(v::Vector{T}) where T<:Real
     idx = findall(abs.(v) .> 0.1)
@@ -41,12 +41,76 @@ function generalized_null(A::Matrix{T}) where T<:Real
         if length(vecs) == length(found)  # nothing new, we're done
             return list
         end
-
-        newvecs = setdiff(vecs, found)
-        push!(list, newvecs)
+        newvecs = vecs
+        push!(list, vecs)
         found = vecs
         k += 1
     end
 end
 
 generalized_null(f::DiscreteFunction) = generalized_null(Matrix(f))
+
+"""
+`jordan(A::Matrix)` or `jordan(f::DiscreteFunction)` reports the Jordan structure
+for the zero eigenvalues of `A` or `Matrix(f)`.
+"""
+function jordan(A::Matrix{T}) where T<:Real
+    sets = generalized_null(A)
+    n = length(sets)
+    r = length.(sets)
+    s = 0r
+    s[1] = r[1]
+    for j=2:n
+        s[j] = r[j]-r[j-1]
+    end
+    m = 0s
+
+    for j=1:n-1
+        m[j] = s[j]-s[j+1]
+    end
+    m[n] = s[n]
+
+    blocks = Counter{Int}()
+    for j=1:n
+        blocks[j] += m[j]
+    end
+
+    return blocks
+end
+
+jordan(f::DiscreteFunction) = jordan(Matrix(f))
+
+function _zero_block(k::Int)
+    A = zeros(Int,k,k)
+    for j=1:k-1
+        A[j,j+1]=1
+    end
+    return A
+end
+
+"""
+`jordan_report(f::DiscreteFunction)` provides information about
+the JCF of `Matrix(f)` where we assume `f` is a tree function.
+The JCF is returned. We assume `f` has exactly one eigenvalue equal
+to 1 and the rest of the eigenvalues are 0s.
+"""
+function jordan_report(A::Matrix{T}) where T<:Real
+    counts = jordan(A)
+    nc = length(counts)
+    for j=1:nc
+        if counts[j]>0
+            println("$(counts[j]) Jordan blocks of size $j")
+        end
+    end
+
+    JCF = ones(Int,1,1)
+    for j=nc:-1:1
+        for a = 1:counts[j]
+            JCF = dcat(JCF,_zero_block(j))
+        end
+    end
+
+
+    return JCF
+end
+jordan_report(f::DiscreteFunction) = jordan_report(Matrix(f))
