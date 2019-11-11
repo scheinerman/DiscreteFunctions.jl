@@ -1,12 +1,4 @@
 # DiscreteFunctions
-
-
-[![Build Status](https://travis-ci.org/scheinerman/DiscreteFunctions.jl.svg?branch=master)](https://travis-ci.org/scheinerman/DiscreteFunctions.jl)
-
-
-[![codecov.io](http://codecov.io/github/scheinerman/DiscreteFunctions.jl/coverage.svg?branch=master)](http://codecov.io/github/scheinerman/DiscreteFunctions.jl?branch=master)
-
-
 This module defines the `DiscreteFunction` type which represents a
 function defined on the set `{1,2,...,n}` (`n` must be positive).
 
