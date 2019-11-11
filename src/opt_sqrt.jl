@@ -1,5 +1,6 @@
 using JuMP
 using Cbc
+using ChooseOptimizer
 using DiscreteFunctions
 using LinearAlgebra
 import Base.sqrt
@@ -7,7 +8,7 @@ import Base.sqrt
 """
 `sqrt(g::DiscreteFunction)` returns a function `f` such that
 `f*f==g` or throws an error if no such function exists.
-This method uses integer linear programming. 
+This method uses integer linear programming.
 """
 function sqrt(g::DiscreteFunction)::DiscreteFunction
     err_msg = "This function does not have a square root."
@@ -17,11 +18,11 @@ function sqrt(g::DiscreteFunction)::DiscreteFunction
     if !quick_sqrt_test(g)
         error(err_msg)
     end
+    
+    # options = Dict()
+    # options[:logLevel] = 0
 
-    options = Dict()
-    options[:logLevel] = 0
-
-    MOD = Model(with_optimizer(Cbc.Optimizer; Dict(:logLevel=>0)...) )
+    MOD = Model(get_solver())
 
     @variable(MOD, a[1:n,1:n], Bin)  # entry in A matrix
     @variable(MOD, w[1:n,1:n,1:n], Bin) # w[i,j,k] is a[i,j]*a[j,k]
