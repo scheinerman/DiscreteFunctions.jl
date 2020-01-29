@@ -43,3 +43,7 @@ B = Matrix(g)
 
 f = sqrt(g)
 @test g == f*f
+
+f = RandomFunction(9)
+A = Matrix(f)
+@test f == DiscreteFunction(A)

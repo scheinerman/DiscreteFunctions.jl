@@ -56,6 +56,39 @@ function Permutation(f::DiscreteFunction)
     error("This function cannot be converted to a Permutation")
 end
 
+matrix2vec(A::Matrix) = matrix2vec(A .!= 0)
+
+function matrix2vec(A::BitArray{2})
+    r,c = size(A)
+    if r != c
+        @error "Matrix must be square"
+    end
+    u = sum(A,dims=2)  # get row sums
+    if !all(u.==1)
+        @error "Matrix should have a single nonzero entry in each row"
+    end
+
+    vec = zeros(Int,r)
+    for i=1:r
+        vec[i] = first(findall(A[i,:]))
+    end
+
+    return vec
+
+end
+
+"""
+`DiscreteFunction(A)` creates a new
+discrete function based on the square matrix `A`. It is required
+that each row of `A` have exactly one nonzero element. Note that
+if `A=Matrix(f)` then `DiscreteFunction(A)==f`.
+"""
+DiscreteFunction(A::Matrix) = DiscreteFunction(matrix2vec(A))
+DiscreteFunction(A::BitArray{2}) = DiscreteFunction(matrix2vec(A))
+
+
+
+
 
 """
 `IdentityFunction(n)` creates the identity `DiscreteFunction` on

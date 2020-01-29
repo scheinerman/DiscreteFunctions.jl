@@ -19,6 +19,7 @@ true
 Function evaluation may use either `f(x)` or `f[x]`. It is possible
 to change the value of `f` at `x` using the latter.
 
+#### Conversion of a `Permutation` to a `DiscreteFunction`
 If `p` is a `Permutation` then `DiscreteFunction(p)` creates a
 `DiscreteFunction` based on `p`.
 ```
@@ -35,6 +36,17 @@ DiscreteFunction on [6]
 
 Conversely, if `f` is a `DiscreteFunction` that is invertible, it can be
 converted to a `Permutation` by `Permutation(f)`.
+
+#### Conversion of a `Matrix` to a `DiscreteFunction`
+
+Let `A` be a square matrix with exactly one nonzero element in each row.
+Then `DiscreteFunction(A)` creates a `DiscreteFunction` `f` such that
+`f[i]==j` exactly when `A[i,j] != 0`.
+
+This is the inverse of the `Matrix` function (see below). That is,
+if `A==Matrix(f)` then `f==DiscreteFunction(A)`.
+
+
 
 ## Special Constructors
 
