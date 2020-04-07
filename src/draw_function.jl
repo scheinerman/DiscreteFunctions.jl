@@ -43,7 +43,7 @@ function draw(f::DiscreteFunction)
     for j=1:n
         x,y = xy[j]
         # draw_point(x,y,color=:black,marker=1)
-        annotate!(x,y,text(string(j),8,color=:red))
+        annotate!((x,y,text(string(j),8,color=:red)))
     end
 
     finish()
