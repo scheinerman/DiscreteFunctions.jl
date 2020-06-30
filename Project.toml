@@ -13,7 +13,7 @@ SimpleTools = "4696fa5f-36f0-5b18-99a6-fef83351280f"
 [compat]
 julia = "1"
 Cbc = "0"
-ChooseOptimizer = "1"
+ChooseOptimizer = "0"
 JuMP = "0"
 Permutations = "0"
 SimpleTools = "0"
