@@ -5,7 +5,9 @@ function defined on the set `{1,2,...,n}` (`n` must be positive).
 ## Basic Constructor
 
 A `DiscreteFunction` is created by providing a list of values either by
-passing an array of `Int` values or as a list of `Int` arguments:
+passing an array of `Int` values or as a list of `Int` arguments.
+For example, to define a function `f` with `f(1)==2`, `f(2)==3`,
+`f(3)==1`, and `f(4)==4` we do this:
 ```
 julia> using DiscreteFunctions
 
