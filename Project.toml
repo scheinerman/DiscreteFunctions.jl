@@ -1,5 +1,6 @@
 name = "DiscreteFunctions"
 uuid = "b53ab163-7315-5a32-b7e7-8af45be20176"
+version = "0.2.0"
 
 [deps]
 Cbc = "9961bab8-2fa3-5c5a-9d89-47fab24efd76"
@@ -10,7 +11,12 @@ Permutations = "2ae35dd2-176d-5d53-8349-f30d82d94d4f"
 SimpleTools = "4696fa5f-36f0-5b18-99a6-fef83351280f"
 
 [compat]
-julia = "≥ 1.0.0"
+julia = "1"
+Cbc = "0"
+ChooseOptimizer = "1"
+JuMP = "0"
+Permutations = "0"
+SimpleTools = "0"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
