@@ -12,11 +12,11 @@ SimpleTools = "4696fa5f-36f0-5b18-99a6-fef83351280f"
 
 [compat]
 julia = "1"
-Cbc = "0"
-ChooseOptimizer = "0"
-JuMP = "0"
-Permutations = "0"
-SimpleTools = "0"
+Cbc = "0.4, 0.5, 0.6, 0.7"
+ChooseOptimizer = "0.1"
+JuMP = "0.18, 0.19, 0.20, 0.21"
+Permutations = "0.3, 0.4"
+SimpleTools = "0.2, 0.3, 0.4"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
