@@ -24,7 +24,7 @@ function draw(f::DiscreteFunction)
     newdraw()
 
     G = func2graph(f)
-    xy = G.cache[:GraphEmbedding].xy
+    xy = getxy(G)
 
     # xy = [ (n*sin(2*pi*t/n),n*cos(-2*pi*t/n)) for t=0:n-1 ]
 
@@ -48,3 +48,4 @@ function draw(f::DiscreteFunction)
 
     finish()
 end
+
