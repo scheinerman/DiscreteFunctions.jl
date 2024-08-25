@@ -1,8 +1,5 @@
 # DiscreteFunctions
 
-[![Build Status](https://travis-ci.com/scheinerman/DiscreteFunctions.jl.svg?branch=master)](https://travis-ci.com/scheinerman/DiscreteFunctions.jl)
-
-
 
 This module defines the `DiscreteFunction` type which represents a
 function defined on the set `{1,2,...,n}` (`n` must be positive).
