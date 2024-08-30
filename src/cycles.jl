@@ -24,10 +24,10 @@ function _find_cycle(f::DiscreteFunction, s::Int)
 end
 
 function _standardize_cycle(c::Array{Int,1})
-    (x,idx) = findmin(c)
+    (x, idx) = findmin(c)
     front = c[idx:end]
-    back  = c[1:idx-1]
-    return vcat(front,back)
+    back = c[1:idx-1]
+    return vcat(front, back)
 end
 
 
@@ -38,10 +38,10 @@ function cycles(f::DiscreteFunction)::Array{Array{Int,1},1}
     result = Set{Array{Int,1}}()
 
     n = length(f)
-    for s=1:n
-        c = _find_cycle(f,s)
+    for s = 1:n
+        c = _find_cycle(f, s)
         c = _standardize_cycle(c)
-        push!(result,c)
+        push!(result, c)
     end
 
     return sort(collect(result))

@@ -7,6 +7,6 @@ with out-degree 0 in the graph of `f`.
 """
 function sources(f::DiscreteFunction)
     n = length(f)
-    S = setdiff( Set(1:n), image(f))
+    S = setdiff(Set(1:n), image(f))
     return sort(collect(S))
 end

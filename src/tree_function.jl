@@ -11,10 +11,10 @@ it *must* be a tree with vertex set `1:n`.
 """
 function tree2function(G::SimpleGraph)::DiscreteFunction
     n = NV(G)
-    data = zeros(Int,n)
+    data = zeros(Int, n)
     data[1] = 1
     for v = 2:n
-        P = find_path(G,v,1)
+        P = find_path(G, v, 1)
         data[v] = P[2]
     end
     return DiscreteFunction(data)

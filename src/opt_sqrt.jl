@@ -18,34 +18,34 @@ function sqrt(g::DiscreteFunction)::DiscreteFunction
     if !quick_sqrt_test(g)
         error(err_msg)
     end
-    
+
     # options = Dict()
     # options[:logLevel] = 0
 
     MOD = Model(get_solver())
 
-    @variable(MOD, a[1:n,1:n], Bin)  # entry in A matrix
-    @variable(MOD, w[1:n,1:n,1:n], Bin) # w[i,j,k] is a[i,j]*a[j,k]
+    @variable(MOD, a[1:n, 1:n], Bin)  # entry in A matrix
+    @variable(MOD, w[1:n, 1:n, 1:n], Bin) # w[i,j,k] is a[i,j]*a[j,k]
 
     # this ensures w[i,j,k] is 0 if either a[i,j] or a[j,k] are
-    for i=1:n
-        for j=1:n
-            for k=1:n
-                @constraint(MOD, a[i,j]>=w[i,j,k])
-                @constraint(MOD, a[j,k]>=w[i,j,k])
+    for i = 1:n
+        for j = 1:n
+            for k = 1:n
+                @constraint(MOD, a[i, j] >= w[i, j, k])
+                @constraint(MOD, a[j, k] >= w[i, j, k])
             end
         end
     end
 
     # this ensures that the A matrix represents a function
-    for i=1:n
-        @constraint(MOD, sum(a[i,j] for j=1:n) == 1)
+    for i = 1:n
+        @constraint(MOD, sum(a[i, j] for j = 1:n) == 1)
     end
 
     # this ensures that A^2 == B
-    for i=1:n
-        for k=1:n
-            @constraint(MOD, sum(w[i,j,k] for j=1:n) == B[i,k])
+    for i = 1:n
+        for k = 1:n
+            @constraint(MOD, sum(w[i, j, k] for j = 1:n) == B[i, k])
         end
     end
 
@@ -62,9 +62,9 @@ function sqrt(g::DiscreteFunction)::DiscreteFunction
     # build the sqrt function from the A matrix
     A = Int.(value.(a))
     f = DiscreteFunction(n)
-    for i=1:n
-        for j=1:n
-            if A[i,j]==1
+    for i = 1:n
+        for j = 1:n
+            if A[i, j] == 1
                 f[i] = j
             end
         end
@@ -97,9 +97,9 @@ function quick_sqrt_test(f::DiscreteFunction)::Bool
     return d > 0.5
 end
 
-function reduced_eigvals(A::Array{T,2}) where T
+function reduced_eigvals(A::Array{T,2}) where {T}
     elist = eigvals(A)
-    return filter(x -> abs(x)>1e-7, elist)
+    return filter(x -> abs(x) > 1e-7, elist)
 end
 
 """

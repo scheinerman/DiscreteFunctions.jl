@@ -1,9 +1,9 @@
 using Test
 using DiscreteFunctions, Permutations
 
-f = DiscreteFunction(2,3,4,1)
-ff = DiscreteFunction([2,3,4,1])
-@test f==ff
+f = DiscreteFunction(2, 3, 4, 1)
+ff = DiscreteFunction([2, 3, 4, 1])
+@test f == ff
 @test hash(f) == hash(ff)
 @test f(1) == 2
 g = f^2
@@ -12,17 +12,17 @@ g = f^2
 g = inv(f)
 @test g(1) == 4
 @test g[1] == g(1)
-@test f*g == IdentityFunction(4)
-g[1]=2
-@test g(1)==2
+@test f * g == IdentityFunction(4)
+g[1] = 2
+@test g(1) == 2
 
 @test length(f) == 4
 
-@test f*f*f == f^3
+@test f * f * f == f^3
 @test inv(f) == f^-1
 
 f = RandomFunction(4)
-@test f*IdentityFunction(4) == f
+@test f * IdentityFunction(4) == f
 
 f = IdentityFunction(4)
 @test fixed_points(f) == collect(1:4)
@@ -36,13 +36,13 @@ p = RandomPermutation(10)
 f = DiscreteFunction(p)
 @test f.data == p.data
 
-g = f*f
+g = f * f
 A = Matrix(f)
 B = Matrix(g)
-@test A*A == B
+@test A * A == B
 
 f = sqrt(g)
-@test g == f*f
+@test g == f * f
 
 f = RandomFunction(9)
 A = Matrix(f)
